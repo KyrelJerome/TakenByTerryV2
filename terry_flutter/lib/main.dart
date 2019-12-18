@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:font_awesome_flutter/icon_data.dart';
+import 'package:terry_flutter/utils.dart';
 
 void main() => runApp(PortfolioApp());
 
@@ -42,8 +43,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    if (isSmall(context)) {
-    } else if (isMedium(context)) {
+    if (getScreenSize(context) == ScreenSize.small) {
+    } else if (getScreenSize(context) == ScreenSize.medium) {
     } else {
       //Return large or XL
       return Scaffold(
@@ -70,7 +71,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class ResponsiveSidebar extends StatelessWidget {
+class LargeSidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -127,9 +128,27 @@ class ResponsiveSidebar extends StatelessWidget {
                     Expanded(
                         child: Column(
                       children: <Widget>[
-                        Text("Insta"),
-                        Text(""),
-                        Text("Youtube"),
+                        IconButton(
+                          // Use the FontAwesomeIcons class for the IconData
+                          icon: new Icon(FontAwesomeIcons.instagram),
+                          onPressed: () {
+                            navigate("https://www.instagram.com/takenbyterry/");
+                          },
+                        ),
+                        IconButton(
+                          // Use the FontAwesomeIcons class for the IconData
+                          icon: new Icon(FontAwesomeIcons.youtube),
+                          onPressed: () {
+                            navigate("Pressed");
+                          },
+                        ),
+                        IconButton(
+                          // Use the FontAwesomeIcons class for the IconData
+                          icon: new Icon(FontAwesomeIcons.envelope),
+                          onPressed: () {
+                            navigate("Pressed");
+                          },
+                        ),
                       ],
                     )),
                     Expanded(child: CircleAvatar(child: FlutterLogo()))
