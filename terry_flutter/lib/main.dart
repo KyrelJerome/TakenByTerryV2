@@ -34,31 +34,27 @@ class PortfolioApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   HomePage({Key key, this.title}) : super(key: key);
   final String title;
-  @override
-  _HomePageState createState() => _HomePageState();
-}
 
-class _HomePageState extends State<HomePage> {
-  @override
   Widget build(BuildContext context) {
     AppBar appbar = AppBar(
       backgroundColor: Colors.black,
       centerTitle: true,
       title: Text(
-        widget.title,
+        title,
         style: Theme.of(context).textTheme.title.copyWith(color: Colors.white),
       ),
     );
     if (getScreenSize(context) == ScreenSize.small) {
       return Scaffold(
+        backgroundColor: Colors.black,
         drawer: Drawer(
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              Sidebar(),
+              Sidebar(title),
             ],
           ),
         ),
@@ -90,7 +86,7 @@ class _HomePageState extends State<HomePage> {
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              Sidebar(),
+              Sidebar(title),
             ],
           ),
         ),
@@ -103,7 +99,7 @@ class _HomePageState extends State<HomePage> {
           width: double.infinity,
           child: Row(
             children: <Widget>[
-              Sidebar(),
+              Sidebar(title),
               Expanded(
                 flex: 3,
                 child: RollingJumbotron(),
@@ -136,6 +132,10 @@ class _RollingJumbotronState extends State<RollingJumbotron> {
 }
 
 class Sidebar extends StatelessWidget {
+  final String title;
+
+  Sidebar(this.title);
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -150,8 +150,8 @@ class Sidebar extends StatelessWidget {
               children: <Widget>[
                 Container(
                   child: ActiveHref(
-                    "Terry Manzi",
-                    "https://kyreljero.me/Assets/KyrelJeromeResume.pdf",
+                    title,
+                    "https://terrymanzi.me/Assets/KyrelJeromeResume.pdf",
                     style: Theme.of(context).textTheme.title,
                   ),
                 ),
