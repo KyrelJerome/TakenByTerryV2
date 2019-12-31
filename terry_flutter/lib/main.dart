@@ -3,32 +3,33 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:terry_flutter/utils.dart';
 
+import 'HrefText.dart';
+
 void main() => runApp(PortfolioApp());
 
 class PortfolioApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    TextTheme textTheme = TextTheme(
+      title: GoogleFonts.workSans(
+        textStyle: TextStyle(
+          fontSize: 40.0,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      body1: GoogleFonts.workSans(
+        textStyle: TextStyle(
+          fontSize: 20.0,
+        ),
+      ),
+    );
     return MaterialApp(
       title: 'Taken By Terry',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        textTheme: TextTheme(
-          title: GoogleFonts.workSans(
-            textStyle: TextStyle(
-              fontSize: 40.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          body1: GoogleFonts.workSans(
-            textStyle: TextStyle(
-              fontSize: 20.0,
-            ),
-          ),
-        ),
+        textTheme: textTheme,
       ),
-      home: HomePage(title: 'Taken By Terry'),
+      home: HomePage(title: 'Terry Manzi'),
     );
   }
 }
@@ -43,26 +44,66 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    AppBar appbar = AppBar(
+      backgroundColor: Colors.black,
+      centerTitle: true,
+      title: Text(
+        widget.title,
+        style: Theme.of(context).textTheme.title.copyWith(color: Colors.white),
+      ),
+    );
     if (getScreenSize(context) == ScreenSize.small) {
-      print("Drawing Small-");
       return Scaffold(
-        backgroundColor: Colors.blue,
+        drawer: Drawer(
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Sidebar(),
+            ],
+          ),
+        ),
+        appBar: appbar,
+        body: Container(
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: RollingJumbotron(),
+              ),
+            ],
+          ),
+        ),
       );
     } else if (getScreenSize(context) == ScreenSize.medium) {
-      print("Drawing Small-Medium");
       return Scaffold(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.white,
+        appBar: appbar,
+        body: Container(
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: RollingJumbotron(),
+              ),
+            ],
+          ),
+        ),
+        drawer: Drawer(
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Sidebar(),
+            ],
+          ),
+        ),
       );
     } else {
       //Return large or XL
-      print("Drawing Large+");
       return Scaffold(
         body: Container(
           height: double.infinity,
           width: double.infinity,
           child: Row(
             children: <Widget>[
-              LargeSidebar(),
+              Sidebar(),
               Expanded(
                 flex: 3,
                 child: RollingJumbotron(),
@@ -94,7 +135,7 @@ class _RollingJumbotronState extends State<RollingJumbotron> {
   }
 }
 
-class LargeSidebar extends StatelessWidget {
+class Sidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -108,8 +149,9 @@ class LargeSidebar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  child: Text(
+                  child: ActiveHref(
                     "Terry Manzi",
+                    "https://kyreljero.me/Assets/KyrelJeromeResume.pdf",
                     style: Theme.of(context).textTheme.title,
                   ),
                 ),
@@ -117,16 +159,19 @@ class LargeSidebar extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
+                      ActiveHref(
                         "Photographer",
+                        "https://flic.kr/s/aHsmKizHYo",
                         style: Theme.of(context).textTheme.title,
                       ),
-                      Text(
+                      ActiveHref(
                         "Film-maker",
+                        "https://www.youtube.com/playlist?list=PL3sj-yrxWlPd2ZYIjY5qppwMzhdMWYEng",
                         style: Theme.of(context).textTheme.title,
                       ),
-                      Text(
+                      ActiveHref(
                         "Graphic Editor",
+                        "https://www.youtube.ca",
                         style: Theme.of(context).textTheme.title,
                       ),
                     ],
@@ -170,7 +215,6 @@ class LargeSidebar extends StatelessWidget {
                             IconButton(
                               // Use the FontAwesomeIcons class for the IconData
                               icon: new Icon(FontAwesomeIcons.youtube),
-                              padding: EdgeInsets.all(16),
                               iconSize: 50,
                               onPressed: () {
                                 navigate(
@@ -182,7 +226,7 @@ class LargeSidebar extends StatelessWidget {
                               icon: new Icon(FontAwesomeIcons.envelope),
                               iconSize: 50,
                               onPressed: () {
-                                navigate("");
+                                navigate("mailto:terrymanzi@yahoo.com");
                               },
                             ),
                           ],
@@ -190,8 +234,16 @@ class LargeSidebar extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 3,
-                        child: FlutterLogo(size: 150),
-                      )
+                        child: Container(
+                          child: Center(
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage("assets/profile.jpg"),
+                              minRadius: 45,
+                              maxRadius: 75,
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

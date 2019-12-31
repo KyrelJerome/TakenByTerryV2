@@ -5,9 +5,9 @@ enum ScreenSize { small, medium, large }
 
 ScreenSize getScreenSize(context) {
   double width = MediaQuery.of(context).size.width;
-  if (width < 600) {
+  if (width < 00) {
     return ScreenSize.small;
-  } else if (width < 1425) {
+  } else if (width < 1024) {
     return ScreenSize.medium;
   } else {
     return ScreenSize.large;
