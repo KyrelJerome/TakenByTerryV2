@@ -1,12 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:terry_flutter/utils.dart';
 
 class ImageTile extends StatefulWidget {
   @override
   _ImageTileState createState() => _ImageTileState();
   ImageTile(
     this.text,
-    this.imageurl, {
+    this.imageUrl,
+    this.navUrl, {
     this.textStyle,
     this.hoverColor = Colors.black,
   });
@@ -14,7 +16,8 @@ class ImageTile extends StatefulWidget {
   final String text;
   final hoverColor;
   final textStyle;
-  final String imageurl;
+  final String imageUrl;
+  final String navUrl;
 }
 
 class _ImageTileState extends State<ImageTile> {
@@ -29,34 +32,40 @@ class _ImageTileState extends State<ImageTile> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: onEnterCallback,
-      onExit: onExitCallback,
-      child: Container(
-        color: Colors.black,
-        child: Stack(
-          children: <Widget>[
-            AnimatedOpacity(
-              duration: Duration(milliseconds: 150),
-              opacity: hovering ? hoverOpacity : 0.0,
-              child: Container(
-                width: double.infinity,
-                color: widget.hoverColor,
-                child: Center(
-                  child: Image.network(
-                    widget.imageurl,
-                    fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () => navigate(widget.navUrl),
+      child: MouseRegion(
+        onEnter: onEnterCallback,
+        onExit: onExitCallback,
+        child: Container(
+          color: Colors.black,
+          child: Stack(
+            children: <Widget>[
+              AnimatedOpacity(
+                duration: Duration(milliseconds: 150),
+                opacity: hovering ? hoverOpacity : 0.0,
+                child: Container(
+                  width: double.infinity,
+                  color: widget.hoverColor,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      widget.text,
+                      style: Theme.of(context).textTheme.title.copyWith(
+                            color: Colors.white,
+                          ),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Center(
-              child: Text(widget.text,
-                  style: Theme.of(context).textTheme.title.copyWith(
-                        color: Colors.white,
-                      )),
-            ),
-          ],
+              Center(
+                child: Image.network(
+                  widget.imageUrl,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
