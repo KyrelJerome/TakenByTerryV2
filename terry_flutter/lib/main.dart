@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:terry_flutter/utils.dart';
 
 import 'HrefText.dart';
+import 'ImageTile.dart';
 
 void main() => runApp(PortfolioApp());
 
@@ -14,6 +15,12 @@ class PortfolioApp extends StatelessWidget {
       title: GoogleFonts.workSans(
         textStyle: TextStyle(
           fontSize: 40.0,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      subtitle: GoogleFonts.workSans(
+        textStyle: TextStyle(
+          fontSize: 30.0,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -37,7 +44,12 @@ class PortfolioApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   HomePage({Key key, this.title}) : super(key: key);
   final String title;
-
+  final List<String> imageUrls = [
+    "https://live.staticflickr.com/65535/47856049872_ac67730cdd_h.jpg",
+    "https://live.staticflickr.com/65535/48381189666_8bffa7d88f_z.jpg",
+    "https://live.staticflickr.com/4873/45531418644_ab0f822652_z.jpg",
+    "https://live.staticflickr.com/65535/48604513047_bdd1f15af4_z.jpg",
+  ];
   Widget build(BuildContext context) {
     AppBar appbar = AppBar(
       backgroundColor: Colors.black,
@@ -74,10 +86,18 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: appbar,
         body: Container(
-          child: Column(
+          child: Row(
             children: <Widget>[
               Expanded(
+                flex: 3,
                 child: RollingJumbotron(),
+              ),
+              Expanded(
+                flex: 1,
+                child: ListView.builder(
+                  itemBuilder: buildTiles,
+                  itemCount: imageUrls.length,
+                ),
               ),
             ],
           ),
@@ -104,11 +124,25 @@ class HomePage extends StatelessWidget {
                 flex: 3,
                 child: RollingJumbotron(),
               ),
+              Expanded(
+                flex: 1,
+                child: ListView.builder(
+                  itemBuilder: buildTiles,
+                  itemCount: imageUrls.length,
+                ),
+              ),
             ],
           ),
         ),
       );
     }
+  }
+
+  Widget buildTiles(BuildContext context, int item) {
+    return ImageTile(
+      "View Album",
+      imageUrls[item],
+    );
   }
 }
 
@@ -141,7 +175,7 @@ class Sidebar extends StatelessWidget {
     return Expanded(
       child: Center(
         child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 288),
+          constraints: BoxConstraints(maxWidth: 270),
           child: Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -162,17 +196,17 @@ class Sidebar extends StatelessWidget {
                       ActiveHref(
                         "Photographer",
                         "https://flic.kr/s/aHsmKizHYo",
-                        style: Theme.of(context).textTheme.title,
+                        style: Theme.of(context).textTheme.subtitle,
                       ),
                       ActiveHref(
                         "Film-maker",
                         "https://www.youtube.com/playlist?list=PL3sj-yrxWlPd2ZYIjY5qppwMzhdMWYEng",
-                        style: Theme.of(context).textTheme.title,
+                        style: Theme.of(context).textTheme.subtitle,
                       ),
                       ActiveHref(
                         "Graphic Editor",
-                        "https://www.youtube.ca",
-                        style: Theme.of(context).textTheme.title,
+                        "https://flic.kr/s/aHsmKqpnPz",
+                        style: Theme.of(context).textTheme.subtitle,
                       ),
                     ],
                   ),
@@ -181,14 +215,17 @@ class Sidebar extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text("Currently in"),
+                      Text(
+                        "Currently in",
+                        style: Theme.of(context).textTheme.body1,
+                      ),
                       Text(
                         "London,",
-                        style: Theme.of(context).textTheme.title,
+                        style: Theme.of(context).textTheme.subtitle,
                       ),
                       Text(
                         "Ontario",
-                        style: Theme.of(context).textTheme.title,
+                        style: Theme.of(context).textTheme.subtitle,
                       ),
                     ],
                   ),

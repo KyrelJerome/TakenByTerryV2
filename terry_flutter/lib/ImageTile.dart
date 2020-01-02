@@ -30,27 +30,39 @@ class _ImageTileState extends State<ImageTile> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onHover: onEnterCallback,
+      onEnter: onEnterCallback,
       onExit: onExitCallback,
       child: Container(
+        color: Colors.black,
         child: Stack(
           children: <Widget>[
             AnimatedOpacity(
               duration: Duration(milliseconds: 150),
               opacity: hovering ? hoverOpacity : 0.0,
               child: Container(
+                width: double.infinity,
                 color: widget.hoverColor,
-                child: Text(widget.text),
+                child: Center(
+                  child: Image.network(
+                    widget.imageurl,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
-            Image.network(widget.imageurl),
+            Center(
+              child: Text(widget.text,
+                  style: Theme.of(context).textTheme.title.copyWith(
+                        color: Colors.white,
+                      )),
+            ),
           ],
         ),
       ),
     );
   }
 
-  void onEnterCallback(PointerHoverEvent e) {
+  void onEnterCallback(PointerEnterEvent e) {
     setState(() {
       this.hovering = true;
     });
