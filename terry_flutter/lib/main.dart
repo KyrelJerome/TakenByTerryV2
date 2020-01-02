@@ -44,11 +44,17 @@ class PortfolioApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   HomePage({Key key, this.title}) : super(key: key);
   final String title;
-  final List<String> imageUrls = [
-    "https://live.staticflickr.com/65535/47856049872_ac67730cdd_h.jpg",
-    "https://live.staticflickr.com/65535/48381189666_8bffa7d88f_z.jpg",
-    "https://live.staticflickr.com/4873/45531418644_ab0f822652_z.jpg",
-    "https://live.staticflickr.com/65535/48604513047_bdd1f15af4_z.jpg",
+  final List<String> sideImagePath = [
+    "assets/side_1.jpg",
+    "assets/side_2.jpg",
+    "assets/side_3.jpg",
+    "assets/side_4.jpg",
+  ];
+  final List<String> sideImageURLs = [
+    "",
+    "",
+    "",
+    "",
   ];
   Widget build(BuildContext context) {
     AppBar appbar = AppBar(
@@ -96,7 +102,7 @@ class HomePage extends StatelessWidget {
                 flex: 1,
                 child: ListView.builder(
                   itemBuilder: buildTiles,
-                  itemCount: imageUrls.length,
+                  itemCount: sideImageURLs.length,
                 ),
               ),
             ],
@@ -128,7 +134,7 @@ class HomePage extends StatelessWidget {
                 flex: 1,
                 child: ListView.builder(
                   itemBuilder: buildTiles,
-                  itemCount: imageUrls.length,
+                  itemCount: sideImageURLs.length,
                 ),
               ),
             ],
@@ -141,7 +147,8 @@ class HomePage extends StatelessWidget {
   Widget buildTiles(BuildContext context, int item) {
     return ImageTile(
       "View Album",
-      imageUrls[item],
+      sideImagePath[item],
+      sideImageURLs[item],
     );
   }
 }
@@ -157,7 +164,7 @@ class _RollingJumbotronState extends State<RollingJumbotron> {
   Widget build(BuildContext context) {
     return Container(
       child: Image.network(
-        "https://live.staticflickr.com/65535/47856049872_ac67730cdd_h.jpg",
+        "assets/main_1",
         fit: BoxFit.cover,
         height: double.infinity,
       ),

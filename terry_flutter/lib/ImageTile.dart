@@ -59,7 +59,7 @@ class _ImageTileState extends State<ImageTile> {
                 ),
               ),
               Center(
-                child: Image.network(
+                child: Image.asset(
                   widget.imageUrl,
                   fit: BoxFit.cover,
                 ),
