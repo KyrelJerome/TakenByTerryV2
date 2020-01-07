@@ -45,10 +45,10 @@ class HomePage extends StatelessWidget {
   HomePage({Key key, this.title}) : super(key: key);
   final String title;
   final List<String> sideImagePath = [
-    "assets/side_1.jpg",
-    "assets/side_2.jpg",
-    "assets/side_3.jpg",
-    "assets/side_4.jpg",
+    "assets/images/side_1.jpg",
+    "assets/images/side_2.jpg",
+    "assets/images/side_3.jpg",
+    "assets/images/side_4.jpg",
   ];
   final List<String> sideImageURLs = [
     "",
@@ -77,36 +77,18 @@ class HomePage extends StatelessWidget {
           ),
         ),
         appBar: appbar,
-        body: Container(
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: RollingJumbotron(),
-              ),
-            ],
-          ),
+        body: ListView.builder(
+          itemBuilder: buildSmallTile,
+          itemCount: sideImageURLs.length + 1,
         ),
       );
     } else if (getScreenSize(context) == ScreenSize.medium) {
       return Scaffold(
         backgroundColor: Colors.white,
         appBar: appbar,
-        body: Container(
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                flex: 3,
-                child: RollingJumbotron(),
-              ),
-              Expanded(
-                flex: 1,
-                child: ListView.builder(
-                  itemBuilder: buildTiles,
-                  itemCount: sideImageURLs.length,
-                ),
-              ),
-            ],
-          ),
+        body: ListView.builder(
+          itemBuilder: buildMediumTile,
+          itemCount: sideImageURLs.length + 1,
         ),
         drawer: Drawer(
           child: Row(
@@ -133,7 +115,7 @@ class HomePage extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: ListView.builder(
-                  itemBuilder: buildTiles,
+                  itemBuilder: buildLargeTile,
                   itemCount: sideImageURLs.length,
                 ),
               ),
@@ -144,11 +126,63 @@ class HomePage extends StatelessWidget {
     }
   }
 
-  Widget buildTiles(BuildContext context, int item) {
-    return ImageTile(
-      "View Album",
-      sideImagePath[item],
-      sideImageURLs[item],
+  Widget buildSmallTile(BuildContext context, int item) {
+    item = item - 1;
+    if (item == -1) {
+      return Container(
+        width: double.infinity,
+        height: MediaQuery.of(context).size.height - 32,
+        child: Stack(
+          children: <Widget>[
+            RollingJumbotron(),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Icon(Icons.arrow_downward, size: 32),
+            ),
+          ],
+        ),
+      );
+    }
+    return Container(
+      width: double.infinity,
+      height: 250,
+      child: ImageTile(
+        "View Album",
+        sideImagePath[item],
+        sideImageURLs[item],
+      ),
+    );
+  }
+
+  Widget buildMediumTile(BuildContext context, int item) {
+    item = item - 1;
+    if (item == -1) {
+      return Container(
+        width: double.infinity,
+        height: MediaQuery.of(context).size.height - 32,
+        child: RollingJumbotron(),
+      );
+    }
+    return Container(
+      width: double.infinity,
+      height: 350,
+      child: ImageTile(
+        "View Album",
+        sideImagePath[item],
+        sideImageURLs[item],
+      ),
+    );
+  }
+
+  Widget buildLargeTile(BuildContext context, int item) {
+    return Container(
+      width: double.infinity,
+      height: MediaQuery.of(context).size.height / 3,
+      child: ImageTile(
+        "View Album",
+        sideImagePath[item],
+        sideImageURLs[item],
+      ),
     );
   }
 }
@@ -163,8 +197,8 @@ class _RollingJumbotronState extends State<RollingJumbotron> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Image.network(
-        "assets/main_1",
+      child: Image.asset(
+        "assets/images/main_1.jpg",
         fit: BoxFit.cover,
         height: double.infinity,
       ),
@@ -281,7 +315,8 @@ class Sidebar extends StatelessWidget {
                         child: Container(
                           child: Center(
                             child: CircleAvatar(
-                              backgroundImage: AssetImage("assets/profile.jpg"),
+                              backgroundImage:
+                                  AssetImage("assets/images/profile.jpg"),
                               minRadius: 45,
                               maxRadius: 75,
                             ),

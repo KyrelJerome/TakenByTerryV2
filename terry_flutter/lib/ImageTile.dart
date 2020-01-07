@@ -41,27 +41,28 @@ class _ImageTileState extends State<ImageTile> {
           color: Colors.black,
           child: Stack(
             children: <Widget>[
-              AnimatedOpacity(
-                duration: Duration(milliseconds: 150),
-                opacity: hovering ? hoverOpacity : 0.0,
-                child: Container(
-                  width: double.infinity,
-                  color: widget.hoverColor,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      widget.text,
-                      style: Theme.of(context).textTheme.title.copyWith(
-                            color: Colors.white,
-                          ),
-                    ),
-                  ),
-                ),
-              ),
               Center(
                 child: Image.asset(
                   widget.imageUrl,
                   fit: BoxFit.cover,
+                ),
+              ),
+              Positioned.fill(
+                child: AnimatedOpacity(
+                  duration: Duration(milliseconds: 150),
+                  opacity: hovering ? hoverOpacity : 0.0,
+                  child: Container(
+                    color: Colors.black,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        widget.text,
+                        style: Theme.of(context).textTheme.title.copyWith(
+                              color: Colors.white,
+                            ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ],
