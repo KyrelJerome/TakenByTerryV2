@@ -7,7 +7,7 @@ ScreenSize getScreenSize(context) {
   double width = MediaQuery.of(context).size.width;
   if (width < 500) {
     return ScreenSize.small;
-  } else if (width < 1024) {
+  } else if (width < 1120) {
     return ScreenSize.medium;
   } else { 
     return ScreenSize.large;

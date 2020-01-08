@@ -51,10 +51,10 @@ class HomePage extends StatelessWidget {
     "assets/images/side_4.jpg",
   ];
   final List<String> sideImageURLs = [
-    "",
-    "",
-    "",
-    "",
+    "https://flic.kr/s/aHsmv1SxUF",
+    "https://www.flickr.com/gp/139250961@N05/Q26GdH",
+    "https://flic.kr/s/aHsmFvwmUw",
+    "https://www.flickr.com/gp/139250961@N05/Q26GdH",
   ];
   Widget build(BuildContext context) {
     AppBar appbar = AppBar(
@@ -131,13 +131,16 @@ class HomePage extends StatelessWidget {
     if (item == -1) {
       return Container(
         width: double.infinity,
-        height: MediaQuery.of(context).size.height - 32,
+        height: MediaQuery.of(context).size.height - 40,
         child: Stack(
           children: <Widget>[
             RollingJumbotron(),
             Align(
               alignment: Alignment.bottomCenter,
-              child: Icon(Icons.arrow_downward, size: 32),
+              child: Container(
+                  margin: EdgeInsets.all(32),
+                  child: Icon(Icons.arrow_downward,
+                      color: Colors.white, size: 64)),
             ),
           ],
         ),
@@ -158,9 +161,21 @@ class HomePage extends StatelessWidget {
     item = item - 1;
     if (item == -1) {
       return Container(
+        color: Colors.black,
         width: double.infinity,
-        height: MediaQuery.of(context).size.height - 32,
-        child: RollingJumbotron(),
+        height: MediaQuery.of(context).size.height - 40,
+        child: Stack(
+          children: <Widget>[
+            Center(child: RollingJumbotron()),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                  margin: EdgeInsets.all(32),
+                  child: Icon(Icons.arrow_downward,
+                      color: Colors.white, size: 64)),
+            ),
+          ],
+        ),
       );
     }
     return Container(
@@ -221,7 +236,7 @@ class Sidebar extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
                   child: ActiveHref(
@@ -272,55 +287,45 @@ class Sidebar extends StatelessWidget {
                   ),
                 ),
                 Container(
+                  padding: EdgeInsets.only(bottom: 16),
+                  child: Center(
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage("assets/images/profile.jpg"),
+                      minRadius: 45,
+                      maxRadius: 75,
+                    ),
+                  ),
+                ),
+                Container(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            IconButton(
-                              // Use the FontAwesomeIcons class for the IconData
-                              icon: new Icon(FontAwesomeIcons.instagram),
-                              iconSize: 50,
-                              onPressed: () {
-                                navigate(
-                                    "https://www.instagram.com/takenbyterry/");
-                              },
-                            ),
-                            IconButton(
-                              // Use the FontAwesomeIcons class for the IconData
-                              icon: new Icon(FontAwesomeIcons.youtube),
-                              iconSize: 50,
-                              onPressed: () {
-                                navigate(
-                                    "https://www.youtube.com/user/fewcrank");
-                              },
-                            ),
-                            IconButton(
-                              // Use the FontAwesomeIcons class for the IconData
-                              icon: new Icon(FontAwesomeIcons.envelope),
-                              iconSize: 50,
-                              onPressed: () {
-                                navigate("mailto:terrymanzi@yahoo.com");
-                              },
-                            ),
-                          ],
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          child: Icon(FontAwesomeIcons.instagram, size: 50),
+                          onTap: () {
+                            navigate("https://www.instagram.com/takenbyterry/");
+                          },
                         ),
                       ),
-                      Expanded(
-                        flex: 3,
-                        child: Container(
-                          child: Center(
-                            child: CircleAvatar(
-                              backgroundImage:
-                                  AssetImage("assets/images/profile.jpg"),
-                              minRadius: 45,
-                              maxRadius: 75,
-                            ),
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          child: Icon(FontAwesomeIcons.youtube, size: 50),
+                          onTap: () {
+                            navigate("https://www.youtube.com/user/fewcrank");
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          child: Icon(FontAwesomeIcons.envelope, size: 50),
+                          onTap: () {
+                            navigate("mailto:terrymanzi@yahoo.com");
+                          },
                         ),
                       ),
                     ],
