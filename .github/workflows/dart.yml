@@ -15,10 +15,11 @@ jobs:
       with:
         channel: 'beta'
         flutter-version: '1.19.0-4.1.pre'
-    - run: cd ./terry_flutter
-    - run: flutter pub get
-    - run: flutter config --enable-web
-    - run: flutter build web
+    - run: |
+        flutter pub get
+        flutter config --enable-web
+        flutter build web
+    - name: Build Webapp Output
     - uses: EndBug/add-and-commit@v4 # You can change this to use a specific version
       with:
         # The arguments for the `git add` command (see the paragraph below for more info)
