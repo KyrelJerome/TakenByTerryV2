@@ -15,6 +15,7 @@ jobs:
       with:
         channel: 'beta'
         flutter-version: '1.19.0-4.1.pre'
+    - run: cd ./terry_flutter
     - run: flutter pub get
     - run: flutter config --enable-web
     - run: flutter build web
