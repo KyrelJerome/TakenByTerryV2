@@ -17,6 +17,7 @@ jobs:
         flutter-version: '1.19.0-4.1.pre'
     - name: Build Webapp Output
       run: |
+        cd terry_flutter
         flutter pub get
         flutter config --enable-web
         flutter build web
