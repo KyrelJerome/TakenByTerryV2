@@ -25,12 +25,11 @@ jobs:
       run: |
         rm -rf docs
         cp -r terry_flutter/build/web/assets .
-        cp -r terry_flutter/build/web/CNAME .
         cp -r terry_flutter/build/web/flutter_service_worker.js .
         cp -r terry_flutter/build/web/index.html .
         cp -r terry_flutter/build/web/main.dart.js .
         cp -r terry_flutter/build/web/main.dart.js.map .
-        echo www.terrymanzi.me >> ./docs/CNAME
+        echo www.terrymanzi.me >> ./CNAME
     - uses: EndBug/add-and-commit@v4 # You can change this to use a specific version
       with:
         # The arguments for the `git add` command (see the paragraph below for more info)
