@@ -1,6 +1,6 @@
-main: assets/images/main_1.jpg
+main: images/main_1.jpg
 side:
-  - assets/images/side_1.jpg
-  - assets/images/side_2.jpg
-  - assets/images/side_3.jpg
-  - assets/images/side_4.jpg
+  - images/side_1.jpg
+  - images/side_2.jpg
+  - images/side_3.jpg
+  - images/side_4.jpg
