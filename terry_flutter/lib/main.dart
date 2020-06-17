@@ -41,27 +41,42 @@ class PortfolioApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
   final String title;
-  final List<String> sideImagePath = [
-    "assets/images/side_1.jpg",
-    "assets/images/side_2.jpg",
-    "assets/images/side_3.jpg",
-    "assets/images/side_4.jpg",
-  ];
-  final List<String> sideImageURLs = [
-    "https://flic.kr/s/aHsmv1SxUF",
-    "https://www.flickr.com/gp/139250961@N05/Q26GdH",
-    "https://flic.kr/s/aHsmFvwmUw",
-    "https://www.flickr.com/gp/139250961@N05/Q26GdH",
-  ];
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String mainImagePath;
+  List<String> sideImagePath = List();
+  List<String> sideImageURLs = List();
+
+  @override
+  void initState() {
+    super.initState();
+    loadImages();
+  }
+
+  void loadImages() async {
+    dynamic sPath = await getSideImages();
+    dynamic mPath = await getMainImage();
+    dynamic sURLs = await getSideImageUrl();
+    setState(() {
+      sideImagePath = sPath;
+      mainImagePath = mPath;
+      sideImageURLs = sURLs;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     AppBar appbar = AppBar(
       backgroundColor: Colors.black,
       centerTitle: true,
       title: Text(
-        title,
+        widget.title,
         style: Theme.of(context).textTheme.title.copyWith(color: Colors.white),
       ),
     );
@@ -72,7 +87,7 @@ class HomePage extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              Sidebar(title),
+              Sidebar(widget.title),
             ],
           ),
         ),
@@ -94,7 +109,7 @@ class HomePage extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              Sidebar(title),
+              Sidebar(widget.title),
             ],
           ),
         ),
@@ -107,10 +122,12 @@ class HomePage extends StatelessWidget {
           width: double.infinity,
           child: Row(
             children: <Widget>[
-              Sidebar(title),
+              Sidebar(widget.title),
               Expanded(
                 flex: 3,
-                child: RollingJumbotron(),
+                child: RollingJumbotron(
+                  imagePath: mainImagePath,
+                ),
               ),
               Expanded(
                 flex: 1,
@@ -134,7 +151,9 @@ class HomePage extends StatelessWidget {
         height: MediaQuery.of(context).size.height - 40,
         child: Stack(
           children: <Widget>[
-            RollingJumbotron(),
+            RollingJumbotron(
+              imagePath: mainImagePath,
+            ),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
@@ -166,7 +185,11 @@ class HomePage extends StatelessWidget {
         height: MediaQuery.of(context).size.height - 40,
         child: Stack(
           children: <Widget>[
-            Center(child: RollingJumbotron()),
+            Center(
+              child: RollingJumbotron(
+                imagePath: mainImagePath,
+              ),
+            ),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
@@ -203,17 +226,23 @@ class HomePage extends StatelessWidget {
 }
 
 class RollingJumbotron extends StatefulWidget {
+  const RollingJumbotron({Key key, this.imagePath}) : super(key: key);
+
   @override
   _RollingJumbotronState createState() => _RollingJumbotronState();
+  final String imagePath;
 }
 
 class _RollingJumbotronState extends State<RollingJumbotron> {
   List<Image> images = List();
   @override
   Widget build(BuildContext context) {
+    if (widget.imagePath == null) {
+      return Container(height: double.infinity);
+    }
     return Container(
       child: Image.asset(
-        "assets/images/main_1.jpg",
+        widget.imagePath,
         fit: BoxFit.cover,
         height: double.infinity,
       ),
@@ -241,7 +270,7 @@ class Sidebar extends StatelessWidget {
                 Container(
                   child: ActiveHref(
                     title,
-                    "https://terrymanzi.me/Assets/KyrelJeromeResume.pdf",
+                    "https://terrymanzi.me/assets/Terry_Resume.pdf",
                     style: Theme.of(context).textTheme.title,
                   ),
                 ),

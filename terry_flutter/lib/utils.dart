@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'dart:html' as html;
+import 'dart:async' show Future;
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:yaml/yaml.dart';
 
 enum ScreenSize { small, medium, large }
 
@@ -9,11 +12,40 @@ ScreenSize getScreenSize(context) {
     return ScreenSize.small;
   } else if (width < 1120) {
     return ScreenSize.medium;
-  } else { 
+  } else {
     return ScreenSize.large;
   }
 }
 
 void navigate(String url) {
   html.window.location.href = url; // or any website your want
+}
+
+dynamic getSideImages() async {
+  String yaml = await rootBundle.loadString('imageFiles.yaml');
+  List<String> urls = [];
+  loadYaml(yaml)["side"].forEach((element)=>urls.add(element));
+  return urls;
+  }
+
+dynamic getMainImage() async {
+  String yaml = await rootBundle.loadString('imageFiles.yaml');
+  dynamic parsed = loadYaml(yaml);
+  return loadYaml(yaml)["main"].toString();
+}
+
+dynamic getSideImageUrl() async {
+  String yaml = await rootBundle.loadString('imageUrls.yaml');
+  List<String> urls = [];
+  dynamic parsed = loadYaml(yaml);
+  parsed["sideUrls"].forEach((element)=>urls.add(element.toString()));
+  return urls;
+}
+
+dynamic getSidebarInfo() async {
+  String yaml = await rootBundle.loadString('imageFiles.yaml');
+  return loadYaml(yaml)["sideBar"].toString();
+  List<String> urls = [];
+  loadYaml(yaml)["side"].map((element)=>urls.add(element));
+  return null;
 }
