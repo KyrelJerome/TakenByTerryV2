@@ -57,7 +57,7 @@ class _ImageTileState extends State<ImageTile> {
                       alignment: Alignment.center,
                       child: Text(
                         widget.text,
-                        style: Theme.of(context).textTheme.title.copyWith(
+                        style: Theme.of(context).textTheme.headline6.copyWith(
                               color: Colors.white,
                             ),
                       ),

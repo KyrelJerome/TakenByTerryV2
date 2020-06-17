@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'dart:html' as html;
-import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:yaml/yaml.dart';
 
@@ -30,7 +29,6 @@ dynamic getSideImages() async {
 
 dynamic getMainImage() async {
   String yaml = await rootBundle.loadString('imageFiles.yaml');
-  dynamic parsed = loadYaml(yaml);
   return loadYaml(yaml)["main"].toString();
 }
 
@@ -44,7 +42,6 @@ dynamic getSideImageUrl() async {
 
 dynamic getSidebarInfo() async {
   String yaml = await rootBundle.loadString('imageFiles.yaml');
-  return loadYaml(yaml)["sideBar"].toString();
   List<String> urls = [];
   loadYaml(yaml)["side"].map((element)=>urls.add(element));
   return null;

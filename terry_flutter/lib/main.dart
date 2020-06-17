@@ -12,19 +12,19 @@ class PortfolioApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = TextTheme(
-      title: GoogleFonts.workSans(
+      headline6: GoogleFonts.workSans(
         textStyle: TextStyle(
           fontSize: 40.0,
           fontWeight: FontWeight.bold,
         ),
       ),
-      subtitle: GoogleFonts.workSans(
+      subtitle2: GoogleFonts.workSans(
         textStyle: TextStyle(
           fontSize: 30.0,
           fontWeight: FontWeight.bold,
         ),
       ),
-      body1: GoogleFonts.workSans(
+      bodyText2: GoogleFonts.workSans(
         textStyle: TextStyle(
           fontSize: 20.0,
         ),
@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
       centerTitle: true,
       title: Text(
         widget.title,
-        style: Theme.of(context).textTheme.title.copyWith(color: Colors.white),
+        style: Theme.of(context).textTheme.headline6.copyWith(color: Colors.white),
       ),
     );
     if (getScreenSize(context) == ScreenSize.small) {
@@ -271,7 +271,7 @@ class Sidebar extends StatelessWidget {
                   child: ActiveHref(
                     title,
                     "https://terrymanzi.me/assets/Terry_Resume.pdf",
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline6,
                   ),
                 ),
                 Container(
@@ -281,17 +281,17 @@ class Sidebar extends StatelessWidget {
                       ActiveHref(
                         "Photographer",
                         "https://flic.kr/s/aHsmKizHYo",
-                        style: Theme.of(context).textTheme.subtitle,
+                        style: Theme.of(context).textTheme.subtitle2,
                       ),
                       ActiveHref(
                         "Film-maker",
                         "https://www.youtube.com/playlist?list=PL3sj-yrxWlPd2ZYIjY5qppwMzhdMWYEng",
-                        style: Theme.of(context).textTheme.subtitle,
+                        style: Theme.of(context).textTheme.subtitle2,
                       ),
                       ActiveHref(
                         "Graphic Editor",
                         "https://flic.kr/s/aHsmKqpnPz",
-                        style: Theme.of(context).textTheme.subtitle,
+                        style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ],
                   ),
@@ -302,15 +302,15 @@ class Sidebar extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Currently in",
-                        style: Theme.of(context).textTheme.body1,
+                        style: Theme.of(context).textTheme.bodyText2,
                       ),
                       Text(
                         "London,",
-                        style: Theme.of(context).textTheme.subtitle,
+                        style: Theme.of(context).textTheme.subtitle2,
                       ),
                       Text(
                         "Ontario",
-                        style: Theme.of(context).textTheme.subtitle,
+                        style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ],
                   ),
