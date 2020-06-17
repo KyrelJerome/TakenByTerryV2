@@ -1,0 +1,52 @@
+name: Continuous_Site_Data_Update
+on:
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:    
+      # Push events on master branch
+      - master
+jobs:
+  build:
+    name: Build Web
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: subosito/flutter-action@v1
+      with:
+        channel: 'beta'
+        flutter-version: '1.19.0-4.1.pre'
+    - name: Build Webapp Output
+      run: |
+        cd terry_flutter
+        flutter pub get
+        flutter config --enable-web
+        flutter build web
+    - uses: EndBug/add-and-commit@v4 # You can change this to use a specific version
+      with:
+        # The arguments for the `git add` command (see the paragraph below for more info)
+        # Default: '.'
+        add: '.'
+
+        # The name of the user that will be displayed as the author of the commit
+        # Default: author of the commit that triggered the run
+        author_name: CommitBot
+
+        # The email of the user that will be displayed as the author of the commit
+        # Default: author of the commit that triggered the run
+        author_email: FakeEmailForCommitBot@gmail.com
+
+        # The local path to the directory where your repository is located. You should use actions/checkout first to set it up
+        # Default: '.'
+        # cwd: './path/to/the/repo'
+
+        # The message for the commit
+        # Default: 'Commit from GitHub Actions'
+        message: 'Commit from Github Action'
+
+        # Name of the branch to use, if different from the one that triggered the workflow
+        # Default: the branch that triggered the workflow (from GITHUB_REF)
+        ref: 'gh-pages'
+
+      env:
+        # This is necessary in order to push a commit to the repo
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
