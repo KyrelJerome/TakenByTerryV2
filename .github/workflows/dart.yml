@@ -23,9 +23,9 @@ jobs:
         flutter build web
     - name: Move to /docs
       run: |
-        mkdir docs
-        cp -r terry_flutter/assets ./docs
-        cp -r terry_flutter/web ./docs
+        rm -rf docs
+        cp -r terry_flutter/build/web .
+        mv ./web ./docs
     - uses: EndBug/add-and-commit@v4 # You can change this to use a specific version
       with:
         # The arguments for the `git add` command (see the paragraph below for more info)
