@@ -270,7 +270,7 @@ class Sidebar extends StatelessWidget {
                 Container(
                   child: ActiveHref(
                     title,
-                    "https://terrymanzi.me/assets/Terry_Resume.pdf",
+                    "https://github.com/KyrelJerome/TakenByTerryV2/raw/master/terry_flutter/assets/Terry_Resume.pdf",
                     style: Theme.of(context).textTheme.headline6,
                   ),
                 ),
