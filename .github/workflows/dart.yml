@@ -24,8 +24,12 @@ jobs:
     - name: Move to /docs
       run: |
         rm -rf docs
-        cp -r terry_flutter/build/web .
-        mv ./web ./docs
+        cp -r terry_flutter/build/web/assets .
+        cp -r terry_flutter/build/web/CNAME .
+        cp -r terry_flutter/build/web/flutter_service_worker.js .
+        cp -r terry_flutter/build/web/index.html .
+        cp -r terry_flutter/build/web/main.dart.js .
+        cp -r terry_flutter/build/web/main.dart.js.map .
         echo www.terrymanzi.me >> ./docs/CNAME
     - uses: EndBug/add-and-commit@v4 # You can change this to use a specific version
       with:
@@ -48,7 +52,7 @@ jobs:
         # The message for the commit
         # Default: 'Commit from GitHub Actions'
         message: 'Commit from Github Action'
-
+        ref: gh-pages
       env:
         # This is necessary in order to push a commit to the repo
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
