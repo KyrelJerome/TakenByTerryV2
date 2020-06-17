@@ -20,7 +20,7 @@ jobs:
         cd terry_flutter
         flutter pub get
         flutter config --enable-web
-        flutter build web
+        flutter build web --release
     - name: Move to /docs
       run: |
         rm -rf docs
