@@ -241,8 +241,8 @@ class _RollingJumbotronState extends State<RollingJumbotron> {
       return Container(height: double.infinity);
     }
     return Container(
-      child: Image.asset(
-        widget.imagePath,
+      child: Image(
+        image: AssetImage(widget.imagePath),
         fit: BoxFit.cover,
         height: double.infinity,
       ),

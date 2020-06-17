@@ -42,8 +42,8 @@ class _ImageTileState extends State<ImageTile> {
           child: Stack(
             children: <Widget>[
               Center(
-                child: Image.asset(
-                  widget.imageUrl,
+                child: Image(
+                  image: AssetImage(widget.imageUrl),
                   fit: BoxFit.cover,
                 ),
               ),
