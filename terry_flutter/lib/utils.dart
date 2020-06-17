@@ -21,19 +21,19 @@ void navigate(String url) {
 }
 
 dynamic getSideImages() async {
-  String yaml = await rootBundle.loadString('imageFiles.yaml');
+  String yaml = await rootBundle.loadString('assets/imageFiles.yaml');
   List<String> urls = [];
   loadYaml(yaml)["side"].forEach((element)=>urls.add(element));
   return urls;
   }
 
 dynamic getMainImage() async {
-  String yaml = await rootBundle.loadString('imageFiles.yaml');
+  String yaml = await rootBundle.loadString('assets/imageFiles.yaml');
   return loadYaml(yaml)["main"].toString();
 }
 
 dynamic getSideImageUrl() async {
-  String yaml = await rootBundle.loadString('imageUrls.yaml');
+  String yaml = await rootBundle.loadString('assets/imageUrls.yaml');
   List<String> urls = [];
   dynamic parsed = loadYaml(yaml);
   parsed["sideUrls"].forEach((element)=>urls.add(element.toString()));
@@ -41,7 +41,7 @@ dynamic getSideImageUrl() async {
 }
 
 dynamic getSidebarInfo() async {
-  String yaml = await rootBundle.loadString('imageFiles.yaml');
+  String yaml = await rootBundle.loadString('assets/imageFiles.yaml');
   List<String> urls = [];
   loadYaml(yaml)["side"].map((element)=>urls.add(element));
   return null;
